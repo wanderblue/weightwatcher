@@ -13,10 +13,8 @@ const passport = require('./config/passport')
 const PORT = process.env.PORT || 3001
 
 if (process.env.NODE_ENV === 'production') {
-xxxxxx}
-
 app.use(express.static('client/public'))
-
+}
 
 /// //////////  middlewares  ////////////
 // NOTE: cookie: `{ secure: false }` used
