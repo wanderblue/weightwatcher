@@ -49,11 +49,12 @@ class Top {
    * @returns Promise
    * @memberof Pet
    */
-  destroy (where) {
+  destroy (id) {
     return knex(this.table)
-      .where(where)
+      .where('id', id)
       .del()
   }
+
   /**
    * update a specific todo
    *

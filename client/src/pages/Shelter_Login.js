@@ -81,6 +81,8 @@ class ShelterLogin extends Component {
         this.props.saveData(results)
       })
       .catch(err => this.setState({ viewAlert: true }))
+
+      window.location = '/topnews';
   }
   /**
    *

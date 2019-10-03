@@ -3,16 +3,17 @@ const express = require('express')
 //const session = require('express-session')
 const morgan = require('morgan')
 const app = express()
+const mongoose = require ("mongoose");
 
 require('dotenv').config()
 const path = require('path')
+//const routes= require ("./routes")
 // Get passport config to this application
 const passport = require('./config/passport')
 const PORT = process.env.PORT || 3001
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-}
+xxxxxx}
 
 app.use(express.static('client/public'))
 
@@ -38,6 +39,9 @@ if (app.get('env') === 'production') {
 }
 
 // Define API routes here
+//app.use(routes)
+
+// Define API routes here
 require('./routes/apiRoutes')(app)
 
 // Send every other request to the React app
@@ -45,6 +49,14 @@ require('./routes/apiRoutes')(app)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build/index.html'))
 })
+
+
+// Connect to the Mongo DB
+//mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theweightwatcher", {useNewUrlParser: true});
+
+
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`)

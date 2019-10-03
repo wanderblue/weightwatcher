@@ -19,6 +19,7 @@ import AddPet from './pages/AddPet'
 import SearchNews from "./pages/SearchNews";
 //import Home from './components/Home'
 
+
 import SiteNavBar from './components/SiteNavBar'
 import Shop from './components/Shop'
 //import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
@@ -29,7 +30,10 @@ import Myhome from './components/myhome'
 //import { Row } from 'react-bootstrap'
 import Footer from './components/Footer';
 
-
+import MyWatcher1 from "./pages/MyWatcher1";
+import martinezNews from './pages/martinezNews'
+import AvailableNews from './pages/SavedNews'
+import TopNews from './pages/topNews'
 class App extends Component {
   state = {
     user: {
@@ -84,7 +88,7 @@ class App extends Component {
                     <LoginButton />
                   </>
                 )}
-                <HomieButton />
+                
               </Row>
             }
           />
@@ -94,12 +98,29 @@ class App extends Component {
         <Switch>
         
          
-              <Route exact path='/home' component={SplashPage} />
+             
+              <Route
+                exact
+                path='/topnews'
+                component={TopNews}
+              />
 
-              <Route exact path="/" component={Myhome} />
-             <Route exact path="/searchNews" component={SearchNews} />
+             <Route exact path="/update" component={SearchNews} />
+             <Route
+                exact
+                path='/AvailableNews'
+                component={AvailableNews}
+              />
+               <Route
+                exact
+                path='/martineznews'
+                component={martinezNews}
+              />
 
 
+<Route exact path='/home' component={SplashPage} />
+
+<Route exact path="/" component={TopNews} />
 
               <Route
                 exact
@@ -111,6 +132,24 @@ class App extends Component {
                 path='/AvaliablePetsPage'
                 component={AvaliablePetsPage}
               />
+
+                       <Route
+                exact
+                path='/localnews'
+                component={TopNews}
+              />
+
+               <Route
+                exact
+                path='/martineznews'
+                component={martinezNews}
+              />
+               <Route
+               exact
+               path="/myweight"
+                component={MyWatcher1}
+                />
+
               <Route
                 exact
                 path='/ShelterLogin'
@@ -136,7 +175,7 @@ class App extends Component {
             </Switch>
           </div>
         </BrowserRouter>
-        <PetFooter />
+      
       </>
     )
   }

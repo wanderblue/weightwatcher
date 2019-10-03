@@ -1,7 +1,7 @@
 /// ///// Dependencies /////////
-const Top = require('../models/topheadlines')
+const Top = require('../../../models/topheadlines')
 
-const booksController = require("../app/controllers/booksController");
+const booksController = require("../../../app/controllers/booksController");
 
 /**
  * apiRoutes: This routes file returns data to the client/view
@@ -9,8 +9,8 @@ const booksController = require("../app/controllers/booksController");
  * where the htmlRoutes.js responds with a handlebars page
  *
  */
-const User = require('../models/users')
-const passport = require('../config/passport')
+const User = require('../../../models/users')
+const passport = require('../../../config/passport')
 const local = require('passport-local')
 const multer = require('multer')
 const chalk = require('chalk')
@@ -63,33 +63,13 @@ module.exports = function (app) {
 
 
    //o
-     app.get('/api/news', function (req, res) {
+     app.get('/api/books', function (req, res) {
     Top.findAll()
       .then(function (dbTopics) {
         res.json(dbTopics)
       })
   })
-
-
-  app.delete('/api/news/:id', function (req, res) {
-    Top.destroy(req.params.id)
-    .then(results => {
-      console.log(`
-      *****
-      Top.delete():
-      ${results}`)
-
-      res.json(results)
-      })
-  })
- // app.delete('/api/examples/:id', function (req, res) {
-   // Example.destroy(req.params)
-     // .then(function (dbExample) {
-       // res.json(dbExample)
-      //})
-  //})
-
-  //get all the news
+ 
   app.get('/api/findAll', function (req, res) {
     Top.findAll().then(function (dbExamples) {
       res.json(dbExamples)
@@ -97,7 +77,7 @@ module.exports = function (app) {
   })
 
 // POST route for saving a new todo. You can create a todo using the data on req.body
-app.post('/api/news', function (req, res) {
+app.post('/api/books', function (req, res) {
   Top.create(req.body)
     .then(results => {
       console.log(`
@@ -108,7 +88,6 @@ app.post('/api/news', function (req, res) {
       res.json(results)
     })
 })
-
 
 //cccccccccccccccccccccccccccccc
 // Register Shelter

@@ -4,6 +4,9 @@ import API from "../utils/API";
 import { Container, Row, Col } from "../components/Grid";
 import SearchFormNews from "../components/SearchFormNews";
 import SearchResult from "../components/SearchResult"
+import { CardColumns } from 'react-bootstrap'
+
+import LatestNewsCluster from '../components/latestNews'
 
 
 class SearchBooks extends Component {
@@ -11,7 +14,8 @@ class SearchBooks extends Component {
     state = {
         search: "",
         books: [{author: "",title: "", description: "", content: "", urlToImage:"", url: "", publishedAt: ""}],
-        error: "",
+   //books: [],
+       error: "",
         message: ""
     };
 
@@ -41,11 +45,12 @@ class SearchBooks extends Component {
         // store response in a array
         let results = res.data.articles
         //map through the array 
+        let i = 1
         results = results.map(result => {
             //store each book information in a new object 
             result = {
-                
-                title: result.title,
+     //           key:result.title,
+               title: result.title,
                 author: result.author,
                 content: result.content,
           //      publishedAt: result.publishedAt,
@@ -53,6 +58,7 @@ class SearchBooks extends Component {
                 urlToImage: result.urlToImage,
                 url: result.url,
             }
+            i++;
             return result;
         })
         // reset the sate of the empty books array to the new arrays of objects with properties geting back from the response
@@ -63,20 +69,70 @@ class SearchBooks extends Component {
 }
 
  
-     handleSavedButton = event => {
+     handleSavedButton1 = event => {
         // console.log(event)
         event.preventDefault();
         console.log("&&&&&&&&&&&&",this.state.books)
         console.log("&&&&&&&&&&&&",event.target.id)
-       // let savedBooks = this.state.books.filter(book => book.id === event.target.id)
-       let savedBooks = this.state.books 
+        let savedBooks = this.state.books.filter(book => book.title === event.target.id)
+       //let savedBooks = this.state.books 
        savedBooks = savedBooks[0];
         console.log("&&&&&&&&&&&&",savedBooks)
 
-        API.saveBook(savedBooks)
+        API.saveNews(savedBooks)
   //          .then(this.setState({ message: alert("Your book is saved") }))
             .catch(err => console.log(err))
     }
+    
+    
+ 
+    handleSavedButton = event => {
+        // console.log(event)
+        event.preventDefault();
+        console.log("&&&&&&&&&&&&",this.state.books)
+        console.log("&&&&&&&&&&&&",event.target.id)
+        //let savedBooks = this.state.books.filter(book => book.title === event.target.id)
+       let savedBooks = this.state.books 
+       //savedBooks = savedBooks[0];
+        console.log("&&&&&&&&&&&&",savedBooks)
+       
+       savedBooks.map(book => {
+        console.log("DDDD",book)
+        API.saveNews(book)
+  //          .then(this.setState({ message: alert("Your book is saved") }))
+            .catch(err => console.log(err))
+        })
+      
+        window.location = "/topnews"
+    }
+     /**
+   *
+   * Render
+   *
+   */
+  renderNews = books => {
+    let _petsElements =books.map(petInfo => {
+      // Each Pet available in the JSON will be
+      // Added as <PetCard> element in _booksElements array
+      return (
+        <LatestNewsCluster 
+   //       key={petInfo.petId}
+    //      id={petInfo.petId}
+          petName={petInfo.title}
+          description={petInfo.description}
+          urlToImage={petInfo.urlToImage}
+          
+          
+        />
+      )
+    })
+    // Return Array of <PetCard> elements
+    return _petsElements
+  }
+   
+    
+    
+    
     render() {
         return (
             <>
@@ -99,6 +155,11 @@ class SearchBooks extends Component {
                     <SearchResult books={this.state.books} handleSavedButton={this.handleSavedButton} />
                 </Container>
             </Container>
+
+
+
+
+
             </>
         )
     }

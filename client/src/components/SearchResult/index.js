@@ -17,6 +17,12 @@ const SearchResult = props => {
                 <div className='article'>
           <h3>Search Results</h3>
 
+          <Row className="buttonDiv ">
+                    <button className="saveBook btn btn-primary" onClick={(event) => props.handleSavedButton(event)}>
+                                       Update News
+                      </button>
+                   </Row>                    
+
           {props.books.map(book => {
             return (
               <li className='search-list list-group-item'>
@@ -28,7 +34,9 @@ const SearchResult = props => {
                   <Col size='9' className='bookInfo'>
 
                   <Row>
+                    <a  href={book.url}>
                     <img className='urlimg' src={book.urlToImage} ></img>
+                    </a>
                     </Row>
 
                     <Row>
@@ -39,16 +47,6 @@ const SearchResult = props => {
                     </Row>
 
  
-
-                    <Row>
-                      <h8 className='bookDescription'>url: <a  href={book.url}>{book.url}</a></h8>
-                    </Row>
-
-                    <Row className="buttonDiv ">
-                    <button className="saveBook btn btn-primary" id={book.id} onClick={(event) => props.handleSavedButton(event)}>
-                                       Save
-                      </button>
-                   </Row>                    
 
                   </Col>
                 </Row>
